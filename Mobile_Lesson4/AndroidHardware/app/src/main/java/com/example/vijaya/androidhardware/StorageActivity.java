@@ -35,6 +35,36 @@ public class StorageActivity extends AppCompatActivity {
     public void retrieveFromFile(View v) throws IOException {
 
         // ICP Task4: Write the code to display the above saved text
+btn_display.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FileInputStream fis =null;
+                try {
+                    fis = openFileInput(FILENAME);
+                    InputStreamReader inputStreamReader = new InputStreamReader(fis);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                    String receiveString = "";
+                    StringBuilder stringBuilder = new StringBuilder();
+                    while ((receiveString = bufferedReader.readLine())!= null){
+                        stringBuilder.append(receiveString);
+                    }
+                    fis.close();
+                    ret = stringBuilder.toString();
+                    contenttoDisplay.setText(ret);
+                    contenttoDisplay.setVisibility(View.VISIBLE);
+
+
+                    contenttoDisplay.setText(txt_content.getText());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
 
     }
 }

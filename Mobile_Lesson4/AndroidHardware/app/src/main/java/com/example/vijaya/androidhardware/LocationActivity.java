@@ -83,6 +83,20 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
         // ICP Task1: Write the code to get the current location of the user
 
         //Getting the address of the user based on latitude and longitude.
+        
+        
+          userCurrentLocation.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                0, 0, userCurrentLocationListener);
+        latitute = userCurrentLocation
+                .getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                .getLatitude();
+        longitude = userCurrentLocation
+                .getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                .getLongitude();
+        userCurrentLocationCorodinates = new LatLng(latitute, longitude);
+        
+        
+        
         try {
             List<Address> addresses = geocoder.getFromLocation(latitute, longitude, 1);
             String city = addresses.get(0).getLocality();
